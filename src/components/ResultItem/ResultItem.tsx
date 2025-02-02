@@ -10,7 +10,7 @@ export class ResultItem extends React.Component<ResultItemProps> {
     const { data } = this.props;
 
     return (
-      <div className="p-4 bg-amber-100 rounded-2xl flex gap-2 w-[290px]">
+      <div className="p-4 bg-amber-100 rounded-2xl flex gap-2 w-[292.5px]">
         <div className="min-w-[120px] h-[120px] rounded-xl overflow-hidden">
           <img
             src={data.image}

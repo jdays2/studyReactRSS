@@ -5,13 +5,10 @@ import { Loader } from '../components/Loader/Loader';
 import { API_CHARACTERS } from '../constants/api';
 import { ApiRespond } from '../types';
 
-interface HomeProps {}
-
 interface HomeState {
   isLoading: boolean;
   isError: boolean;
   data: ApiRespond | null;
-  searchValue: string;
 }
 
 export interface fetchDataArgs {
@@ -20,17 +17,38 @@ export interface fetchDataArgs {
   id?: number;
 }
 
-export class Home extends React.Component<HomeProps, HomeState> {
-  constructor(props: HomeProps) {
-    super(props);
-    this.state = {
-      isLoading: false,
-      isError: false,
-      data: null,
-      searchValue: '',
-    };
+class ErrorButton extends React.Component {
+  state = {
+    isError: false,
+  };
+
+  updateError = () => {
+    this.setState({ isError: true });
+  };
+
+  render() {
+    if (this.state.isError) {
+      throw new Error('Button generated an error!');
+    }
+    return (
+      <button
+        onClick={this.updateError}
+        className="p-2 px-3 rounded-2xl bg-gray-900 text-white cursor-pointer w-fit mx-auto"
+      >
+        Generate Error
+      </button>
+    );
   }
-  updateData(result: any) {
+}
+
+export class Home extends React.Component<unknown, HomeState> {
+  state: HomeState = {
+    isLoading: false,
+    isError: false,
+    data: null,
+  };
+
+  updateData(result: ApiRespond) {
     this.setState({ data: result });
   }
 
@@ -51,10 +69,11 @@ export class Home extends React.Component<HomeProps, HomeState> {
   };
 
   componentDidMount() {
-    const { searchValue } = this.state;
-    if (!searchValue) {
-      this.fetchData({});
+    const storedSearchValue = localStorage.getItem('searchValue');
+    if (!storedSearchValue) {
+      return this.fetchData({});
     }
+    this.fetchData({ search: storedSearchValue.replace(/(^"|"$)/g, '') });
   }
 
   render() {
@@ -63,6 +82,7 @@ export class Home extends React.Component<HomeProps, HomeState> {
       <main className="flex flex-col gap-6 bg-red-200 py-10">
         <SearchBar onSubmit={this.fetchData} />
         {isLoading ? <Loader /> : <Result data={data ? data.results : []} />}
+        <ErrorButton />
       </main>
     );
   }

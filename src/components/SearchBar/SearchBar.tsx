@@ -47,7 +47,8 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
           <input
             value={searchValue}
             onChange={this.searchChange}
-            className="p-2 bg-white rounded-2xl w-2xl"
+            className="p-2 px-4 bg-white rounded-2xl w-2xl"
+            placeholder="Search"
           />
           <button
             type="submit"
