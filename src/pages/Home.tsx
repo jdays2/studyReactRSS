@@ -4,6 +4,7 @@ import { Result } from '../components/Result/Result';
 import { Loader } from '../components/Loader/Loader';
 import { API_CHARACTERS } from '../constants/api';
 import { ApiRespond } from '../types';
+import { getFromLocalStorage } from '../hooks/getFromLocalStorage';
 
 interface HomeState {
   isLoading: boolean;
@@ -15,30 +16,6 @@ export interface fetchDataArgs {
   search?: string;
   page?: number;
   id?: number;
-}
-
-class ErrorButton extends React.Component {
-  state = {
-    isError: false,
-  };
-
-  updateError = () => {
-    this.setState({ isError: true });
-  };
-
-  render() {
-    if (this.state.isError) {
-      throw new Error('Button generated an error!');
-    }
-    return (
-      <button
-        onClick={this.updateError}
-        className="p-2 px-3 rounded-2xl bg-gray-900 text-white cursor-pointer w-fit mx-auto"
-      >
-        Generate Error
-      </button>
-    );
-  }
 }
 
 export class Home extends React.Component<unknown, HomeState> {
@@ -69,7 +46,7 @@ export class Home extends React.Component<unknown, HomeState> {
   };
 
   componentDidMount() {
-    const storedSearchValue = localStorage.getItem('searchValue');
+    const storedSearchValue = getFromLocalStorage('searchValue');
     if (!storedSearchValue) {
       return this.fetchData({});
     }
@@ -79,11 +56,35 @@ export class Home extends React.Component<unknown, HomeState> {
   render() {
     const { isLoading, data } = this.state;
     return (
-      <main className="flex flex-col gap-6 bg-red-200 py-10">
+      <main className="flex flex-col gap-6 bg-red-200 py-10 h-[100vh] rounded-2xl">
         <SearchBar onSubmit={this.fetchData} />
         {isLoading ? <Loader /> : <Result data={data ? data.results : []} />}
         <ErrorButton />
       </main>
+    );
+  }
+}
+
+class ErrorButton extends React.Component {
+  state = {
+    isError: false,
+  };
+
+  updateError = () => {
+    this.setState({ isError: true });
+  };
+
+  render() {
+    if (this.state.isError) {
+      throw new Error('Button generated an error!');
+    }
+    return (
+      <button
+        onClick={this.updateError}
+        className="p-2 px-3 rounded-2xl bg-gray-900 text-white cursor-pointer w-fit mx-auto"
+      >
+        Generate Error
+      </button>
     );
   }
 }

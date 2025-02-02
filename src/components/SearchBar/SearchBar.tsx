@@ -1,5 +1,6 @@
 import React from 'react';
 import { fetchDataArgs } from '../../pages/Home';
+import { getFromLocalStorage } from '../../hooks/getFromLocalStorage';
 
 interface SearchBarProps {
   onSubmit: (object: fetchDataArgs) => void;
@@ -17,9 +18,9 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
   }
 
   componentDidMount() {
-    const storedData = localStorage.getItem('searchValue');
-    if (storedData) {
-      this.setState({ searchValue: JSON.parse(storedData) });
+    const storedSearchValue = getFromLocalStorage('searchValue');
+    if (storedSearchValue) {
+      this.setState({ searchValue: JSON.parse(storedSearchValue) });
     }
   }
 

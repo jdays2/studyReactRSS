@@ -1,6 +1,7 @@
 import React from 'react';
 import { Character } from '../../types';
 import { ResultItem } from '../ResultItem/ResultItem';
+import { NotFound } from '../NotFound/NotFound';
 
 interface ResultProps {
   data: Character[] | null;
@@ -16,7 +17,7 @@ export class Result extends React.Component<ResultProps> {
           {data ? (
             data.map((e: Character) => <ResultItem data={e} key={e.id} />)
           ) : (
-            <h1>nothing found</h1>
+            <NotFound />
           )}
         </div>
       </section>
