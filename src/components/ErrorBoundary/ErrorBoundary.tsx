@@ -43,7 +43,7 @@ export class ErrorBoundary extends React.Component<
           <div className="bg-black flex items-center justify-center h-[900px] text-white">
             <div className="flex flex-col gap-1 m-auto items-center ">
               <div className="w-full h-full">
-                <img src="/src/assets/gif/error.gif" alt="loading-gif" />
+                <img src="/src/assets/gif/error.gif" alt="error-skull-gif" />
               </div>
               <h1 className="text-2xl text-center">Error! Something wrong!</h1>
               <p className="text-xl text-center text-red-900 fading-text ">

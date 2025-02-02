@@ -32,5 +32,5 @@ body {
 
 .fading-text {
   -webkit-animation: colorFade 2s infinite;
-          animation: colorFade 2s infinite; /* Анимация длится 2 секунды и повторяется бесконечно */
+  animation: colorFade 2s infinite; /* Анимация длится 2 секунды и повторяется бесконечно */
 }

@@ -50,7 +50,7 @@ export class Home extends React.Component<unknown, HomeState> {
     if (!storedSearchValue) {
       return this.fetchData({});
     }
-    this.fetchData({ search: storedSearchValue.replace(/(^"|"$)/g, '') });
+    this.fetchData({ search: JSON.parse(storedSearchValue) });
   }
 
   render() {
