@@ -4,7 +4,7 @@ import { Result } from '../components/Result/Result';
 import { Loader } from '../components/Loader/Loader';
 import { API_CHARACTERS } from '../constants/api';
 import { ApiRespond } from '../types';
-import { getFromLocalStorage } from '../hooks/getFromLocalStorage';
+import { getFromLocalStorage } from '../utils/getFromLocalStorage';
 
 interface HomeState {
   isLoading: boolean;

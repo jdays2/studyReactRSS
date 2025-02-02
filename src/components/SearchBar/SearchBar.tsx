@@ -1,6 +1,6 @@
 import React from 'react';
 import { fetchDataArgs } from '../../pages/Home';
-import { getFromLocalStorage } from '../../hooks/getFromLocalStorage';
+import { getFromLocalStorage } from '../../utils/getFromLocalStorage';
 
 interface SearchBarProps {
   onSubmit: (object: fetchDataArgs) => void;

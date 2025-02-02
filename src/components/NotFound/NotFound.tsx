@@ -1,5 +1,5 @@
 import React from 'react';
-import { getFromLocalStorage } from '../../hooks/getFromLocalStorage';
+import { getFromLocalStorage } from '../../utils/getFromLocalStorage';
 
 export class NotFound extends React.Component {
   render() {
